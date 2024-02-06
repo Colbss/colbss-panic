@@ -1,11 +1,14 @@
 # colbss-policebag
 
-# Setup
+# WORK IN PROGRESS
+
+## Setup
 
 1. Add the following to `/resources/[qb]/qb-core/shared/items.lua`:
 
 ```
-['policebag']                     = {['name'] = 'policebag',                ['label'] = 'Police Equipment Bag',   ['weight'] = 2000,         ['type'] = 'item',         ['image'] = 'police_bag.png',               ['unique'] = true,          ['useable'] = true,      ['shouldClose'] = true,      ['combinable'] = nil,   ['description'] = 'A bag of police equipment'},
+['panicbutton']                   = {['name'] = 'panicbutton',                ['label'] = 'Panic Button',   ['weight'] = 1000,         ['type'] = 'item',         ['image'] = 'panic.png',               ['unique'] = true,          ['useable'] = true,      ['shouldClose'] = true,      ['combinable'] = nil,   ['description'] = 'A police panic button.'},
+
 ```
 
-2. Add `police_bag.png` into `[qb]/qb-inventory/html/images`
+2. Add `panic.png` into `[qb]/qb-inventory/html/images`
