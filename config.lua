@@ -7,6 +7,9 @@ Config.BlipTime = 30
 -- Cooldown in seconds to activate panic button
 Config.Cooldown = 5
 
+-- Distance other players have to be to hear panic buttons
+Config.VicinityDistance = 5.0
+
 -- The sound other officers hear
 Config.Sound1 = "panic"
 

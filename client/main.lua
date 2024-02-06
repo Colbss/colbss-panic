@@ -88,45 +88,80 @@ AddEventHandler("panic:client:NewPanic", function(source, Officer)
 
 		if Officer.Ped ~= PlayerPedId() then
 
+			local message = "Officer " .. tostring(Officer.Name) .. " Is In Distress"
+
 			SetNuiFocus(false, false)
 			SendNUIMessage({
 				action = "showAlert",
-				text = "Officer " .. tostring(Officer.Name) .. " Is In Distress",
+				text = message,
 				location = tostring(Officer.Location)
 			})
 		
-			TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 5.0, Config.Sound1, 0.2)
+			TriggerServerEvent("InteractSound_SV:PlayWithinDistance", Config.VicinityDistance, Config.Sound1, 0.2)
 	
 			Citizen.CreateThread(function()
-				local Blip = AddBlipForRadius(Officer.Coords.x, Officer.Coords.y, Officer.Coords.z, 100.0)
-		
-				SetBlipRoute(Blip, true)
+
+				-- Blip Circle
+				local blipCircle = AddBlipForRadius(Officer.Coords.x, Officer.Coords.y, Officer.Coords.z, 100.0)
+				SetBlipRoute(blipCircle, true)
+				SetBlipAlpha(blipCircle, 60)
+				SetBlipColour(blipCircle, 1)
+				SetBlipFlashes(blipCircle, true)
+				SetBlipFlashInterval(blipCircle, 200)
+
+				-- Blip Icon
+				local blipIcon = AddBlipForCoord(Officer.Coords.x, Officer.Coords.y, Officer.Coords.z)
+				SetBlipSprite(blipIcon, 526)
+				SetBlipHighDetail(blipIcon, true)
+				SetBlipScale(blipIcon, 1.5)
+				SetBlipColour(blipIcon, 1)
+				SetBlipAlpha(blipIcon, 255)
+				SetBlipAsShortRange(blipIcon, false)
+				SetBlipCategory(blipIcon, 2)
+				BeginTextCommandSetBlipName('STRING')
+				AddTextComponentString(message)
+				EndTextCommandSetBlipName(blipIcon)
 		
 				Citizen.CreateThread(function()
-					while Blip do
-						SetBlipRouteColour(Blip, 1)
+					while blipCircle do
+						SetBlipRouteColour(blipCircle, 1)
 						Citizen.Wait(150)
-						SetBlipRouteColour(Blip, 6)
+						SetBlipRouteColour(blipCircle, 6)
 						Citizen.Wait(150)
-						SetBlipRouteColour(Blip, 35)
+						SetBlipRouteColour(blipCircle, 35)
 						Citizen.Wait(150)
-						SetBlipRouteColour(Blip, 6)
+						SetBlipRouteColour(blipCircle, 6)
 					end
 				end)
-		
-				SetBlipAlpha(Blip, 60)
-				SetBlipColour(Blip, 1)
-				SetBlipFlashes(Blip, true)
-				SetBlipFlashInterval(Blip, 200)
-		
+
 				Citizen.Wait(Config.BlipTime * 1000)
 		
-				RemoveBlip(Blip)
-				Blip = nil
+				RemoveBlip(blipCircle)
+				RemoveBlip(blipIcon)
+				blipCircle = nil
+				blipIcon = nil
 			end)
 	
 		else
-			TriggerServerEvent("InteractSound_SV:PlayOnSource", Config.Sound2, 0.1)
+			-- If close to an officer, do not play button sound
+			local playSound = true
+			local players = QBCore.Functions.GetPlayersFromCoords(GetEntityCoords(PlayerPedId()), Config.VicinityDistance)
+			for i = 1, #players, 1 do
+				player = players[i]
+				if player ~= PlayerId() then
+					local playerId = GetPlayerServerId(player)
+					QBCore.Functions.TriggerCallback('panic:server:GetJob', function(result)
+						if result and result == "police" then
+							playSound = false
+						end
+					end, playerId)
+					if not playSound then break end
+				end
+			end
+
+			if playSound then
+				TriggerServerEvent("InteractSound_SV:PlayOnSource", Config.Sound2, 0.1)
+			end
 		end
 
 	end
