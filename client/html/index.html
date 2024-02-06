@@ -6,24 +6,22 @@
     <title>Top Alert</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Style for the alert */
         .alert {
-            background-color: #f44336; /* Red background color */
-            color: white; /* White text color */
-            padding: 10px; /* Add some padding */
-            position: fixed; /* Fixed position */
-            top: 200px; /* Adjust the distance from the top */
-            left: 40%; /* Set the left position to be 25% from the left edge */
-            width: 20%; /* Set the width to be 50% of the viewport width */
-            text-align: center; /* Center-align text */
-            z-index: 9999; /* Set a high z-index to make sure it's on top */
-            display: none; /* Initially hidden */
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            top: 200px; 
+            left: 40%;
+            width: 20%;
+            text-align: center;
+            z-index: 9999;
+            display: none;
             border-radius: 10px;
-            border: 2px solid #000000; /* Add a border */
+            border: 2px solid #000000;
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* Style for the close button */
         .closebtn {
             position: absolute;
             right: 10px;
@@ -32,47 +30,44 @@
             cursor: pointer;
         }
 
-        /* Style for the icons */
         .icon-left,
         .icon-right {
             position: absolute;
             top: 50%;
-            font-size: 24px; /* Adjust the icon size */
+            font-size: 24px;
             transform: translateY(-50%);
             padding: 10px
         }
         
-        /* Style for the icons */
         .icon-left,
         .icon-right {
             position: absolute;
             top: 50%;
-            font-size: 24px; /* Adjust the default icon size */
+            font-size: 24px;
             transform: translateY(-50%);
         }
         
         .icon-left {
             left: 10px;
-            font-size: 32px; /* Change the icon size for the left icon */
+            font-size: 32px;
         }
 
         .icon-right {
             right: 10px;
-            font-size: 32px; /* Change the icon size for the right icon */
+            font-size: 32px;
         }
 
-        /* Style for the text with space around it */
         .alert-text{
-            margin-left: 50px; /* Add left margin */
-            margin-right: 50px; /* Add right margin */
+            margin-left: 50px;
+            margin-right: 50px;
             margin-bottom: 10px;
             margin-top: 10px;
 
         }
 
         .alert-location {
-            margin-left: 50px; /* Add left margin */
-            margin-right: 50px; /* Add right margin */
+            margin-left: 50px;
+            margin-right: 50px;
             margin-bottom: 30px;
             margin-top: 10px;
         }
@@ -98,10 +93,7 @@
 
 <script>
 
-    // Listener for opening alert
     window.addEventListener('message', function(event) {
-
-        // Open UI
         if (event.data.action == "showAlert") {
 
             showAlert(event.data.text, event.data.location)
