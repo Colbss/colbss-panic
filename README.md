@@ -4,7 +4,7 @@ Inspired by: https://github.com/inferno-collection/Police-Panic
 
 Preview:
 
-https://medal.tv/games/gta-v/clips/1TEb4KHPnoO3E-/d13378savXLX?invite=cr-MSxWa08sMTk0MjYxNTAzLA
+[https://medal.tv/games/gta-v/clips/1TEb4KHPnoO3E-/d13378savXLX?invite=cr-MSxWa08sMTk0MjYxNTAzLA](https://medal.tv/games/gta-v/clips/1TEb4KHPnoO3E-/d13378savXLX?invite=cr-MSxWa08sMTk0MjYxNTAzLA)
 
 ## Setup
 
