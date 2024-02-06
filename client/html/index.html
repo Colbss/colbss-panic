@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Alert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Style for the alert */
+        .alert {
+            background-color: #f44336; /* Red background color */
+            color: white; /* White text color */
+            padding: 10px; /* Add some padding */
+            position: fixed; /* Fixed position */
+            top: 200px; /* Adjust the distance from the top */
+            left: 40%; /* Set the left position to be 25% from the left edge */
+            width: 20%; /* Set the width to be 50% of the viewport width */
+            text-align: center; /* Center-align text */
+            z-index: 9999; /* Set a high z-index to make sure it's on top */
+            display: none; /* Initially hidden */
+            border-radius: 10px;
+            border: 2px solid #000000; /* Add a border */
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Style for the close button */
+        .closebtn {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        /* Style for the icons */
+        .icon-left,
+        .icon-right {
+            position: absolute;
+            top: 50%;
+            font-size: 24px; /* Adjust the icon size */
+            transform: translateY(-50%);
+            padding: 10px
+        }
+        
+        /* Style for the icons */
+        .icon-left,
+        .icon-right {
+            position: absolute;
+            top: 50%;
+            font-size: 24px; /* Adjust the default icon size */
+            transform: translateY(-50%);
+        }
+        
+        .icon-left {
+            left: 10px;
+            font-size: 32px; /* Change the icon size for the left icon */
+        }
+
+        .icon-right {
+            right: 10px;
+            font-size: 32px; /* Change the icon size for the right icon */
+        }
+
+        /* Style for the text with space around it */
+        .alert-text{
+            margin-left: 50px; /* Add left margin */
+            margin-right: 50px; /* Add right margin */
+            margin-bottom: 10px;
+            margin-top: 10px;
+
+        }
+
+        .alert-location {
+            margin-left: 50px; /* Add left margin */
+            margin-right: 50px; /* Add right margin */
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        h4 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="alert" id="myAlert">
+    <span class="icon-left"><i class="fas fa-exclamation-triangle"></i></span>
+    <span class="icon-right"><i class="fas fa-exclamation-triangle"></i></span>
+    <h1>OFFICER PANIC</h2>
+    <h4 class="alert-text">Text to display on the alert</h4>
+    <h4 class="alert-location">Location: Grove Street</h4>
+</div>
+
+<script>
+
+    // Listener for opening alert
+    window.addEventListener('message', function(event) {
+
+        // Open UI
+        if (event.data.action == "showAlert") {
+
+            showAlert(event.data.text, event.data.location)
+        } 
+    });
+
+    function showAlert(message, location) {
+        var alert = document.getElementById("myAlert");
+        var alertText = alert.querySelector(".alert-text");
+        alertText.textContent = message;
+
+        var alertLoc = alert.querySelector(".alert-location"); 
+        alertLoc.textContent = "Location: " + location; 
+
+        alert.style.display = "block";
+
+        setTimeout(function() {
+            alert.style.display = "none";
+        }, 5000);
+    }
+
+
+</script>
+
+</body>
+</html>
