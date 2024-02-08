@@ -1,4 +1,4 @@
-# colbss-policebag
+# colbss-panicbutton
 
 Inspired by: https://github.com/inferno-collection/Police-Panic
 
