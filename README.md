@@ -1,4 +1,6 @@
-# colbss-panicbutton
+# colbss-panic
+
+Panic button for the police.
 
 Inspired by: https://github.com/inferno-collection/Police-Panic
 
